@@ -1,10 +1,10 @@
 const axios = require('axios');
 
-const getAllItems = async (req, res) => {
-  console.log("Sending GET All Items request from Node");
+const getAllCustomersCtr = async (req, res) => {
+  console.log("Sending GET All Customers request from Node");
   try {
       const response = await axios.get(
-        'https://testwebapp.ctgalega.com/api/resource/Item?fields=[\"*"\]', {
+        'https://testwebapp.ctgalega.com/api/resource/Customer?fields=[\"*\"]', {
           headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json',
@@ -13,15 +13,15 @@ const getAllItems = async (req, res) => {
       });
       const data = response.data.data;
       realData = data.map(item => ({
-        item_name: item.item_name,
-        item_code: item.item_code,
+        name: item.name,
+        customer_group: item.customer_group,
+        owner: item.owner,
         image: item.image,
-        item_group: item.item_group,
       }))
-      console.log(realData);
+      console.log("GET All Customers Success");
       res.status(response.status).json(realData);
   } catch (error) {
-      console.log('something went wrong while GET All Items', error);
+      console.log('something went wrong while GET All Customers', error);
       res.status(error.response?.status || 500).json({
           message: 'Error occurred while processing your request',
           error: error.message,
@@ -29,4 +29,4 @@ const getAllItems = async (req, res) => {
   }
 }
 
-module.exports = { getAllItems };
+module.exports = { getAllCustomersCtr };

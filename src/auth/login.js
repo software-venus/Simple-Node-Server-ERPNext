@@ -1,10 +1,8 @@
-// Alexa handlers
 const axios = require('axios');
 
-const loginHandlers = async (req, res) => {
-  // In case you need data from the incoming request
+const loginCtr = async (req, res) => {
   const requestData = req.body;
-  console.log('Sending GET All Items request from Node with ', requestData);
+  console.log('Sending Login request from Node with ', requestData);
   try {
       const response = await axios.post('https://testwebapp.ctgalega.com/api/method/login', requestData, {
           headers: {
@@ -27,4 +25,4 @@ const loginHandlers = async (req, res) => {
   }
 }
 
-module.exports = { loginHandlers };
+module.exports = { loginCtr };

@@ -1,12 +1,11 @@
 const express = require('express');
-const { createProxyMiddleware } = require('http-proxy-middleware');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { loginHandlers } = require('./src/login');
-const { getAllItems } = require('./src/getAllItems');
-const { getAllCustomers } = require('./src/getAllCustomers');
+const authRoutes = require('./src/auth');
+const itemRoutes = require('./src/itemsCRUD');
+const customerRoutes = require('./src/customeresCRUD');
+const salesOrderRoutes = require('./src/orderCRUD');
 
-// const handlers = require('./src/app').handlers;
 
 // Initialize express server
 const server = express();
@@ -18,10 +17,11 @@ server.use((req, res, next) => {
   console.log(`${req.method} ${req.originalUrl}`);
   next(); // Call the next middleware or route handler
 });
-// Create POST route
-server.post('/api/method/login', loginHandlers);
-server.get('/api/resource/Item/all', getAllItems);
-server.get('/api/resource/Customer', getAllCustomers);
+// Set Routes
+server.use('/api/method', authRoutes);
+server.use('/api/resource/Item', itemRoutes);
+server.use('/api/resource/Customer', customerRoutes);
+server.use('/api/resource/Sales%20Order', salesOrderRoutes);
 
 
 // Start express server
