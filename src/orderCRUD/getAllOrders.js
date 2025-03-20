@@ -14,10 +14,12 @@ const getAllOrdersCtr = async (req, res) => {
       const data = response.data.data;
       realData = data.map(item => ({
         name: item.name,
-        customer: item.customer,
         owner: item.owner,
+        creation: item.creation,
         total_qty: item.total_qty,
+        currency: item.currency,
       }))
+      console.log(realData);
       console.log("GET All Orders Success");
       res.status(response.status).json(realData);
   } catch (error) {
