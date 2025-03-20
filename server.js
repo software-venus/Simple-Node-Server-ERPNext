@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { loginHandlers } = require('./src/login');
 const { getAllItems } = require('./src/getAllItems');
+const { getAllCustomers } = require('./src/getAllCustomers');
 
 // const handlers = require('./src/app').handlers;
 
@@ -20,6 +21,8 @@ server.use((req, res, next) => {
 // Create POST route
 server.post('/api/method/login', loginHandlers);
 server.get('/api/resource/Item/all', getAllItems);
+server.get('/api/resource/Customer', getAllCustomers);
+
 
 // Start express server
 server.listen(3000, () => {
